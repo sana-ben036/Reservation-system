@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ReservationSystem.Models
 {
-    [Table("utilisateur_role")]
+    [Table("user_role")]
     [Index(nameof(IdRole), Name = "IdRole")]
-    public partial class utilisateur_role
+    public partial class user_role
     {
         [Key]
         [Column(TypeName = "int(11)")]
@@ -20,10 +20,10 @@ namespace ReservationSystem.Models
         public int IdRole { get; set; }
 
         [ForeignKey(nameof(IdRole))]
-        [InverseProperty(nameof(role.utilisateur_roles))]
+        [InverseProperty(nameof(role.user_roles))]
         public virtual role IdRoleNavigation { get; set; }
         [ForeignKey(nameof(IdUser))]
-        [InverseProperty(nameof(utilisateur.utilisateur_roles))]
-        public virtual utilisateur IdUserNavigation { get; set; }
+        [InverseProperty(nameof(user.user_roles))]
+        public virtual user IdUserNavigation { get; set; }
     }
 }

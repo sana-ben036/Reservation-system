@@ -40,6 +40,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.0, )"
@@ -50,11 +58,11 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
-            "MySql.EntityFrameworkCore": {
+            "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[5.0.0, )"
             },
-            "System.Configuration.ConfigurationManager": {
+            "MySql.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.0, )"
             }

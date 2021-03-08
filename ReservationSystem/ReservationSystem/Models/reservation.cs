@@ -35,10 +35,10 @@ namespace ReservationSystem.Models
         [InverseProperty(nameof(planing.reservations))]
         public virtual planing IdPlanNavigation { get; set; }
         [ForeignKey(nameof(IdTypeR))]
-        [InverseProperty(nameof(typereservation.reservations))]
-        public virtual typereservation IdTypeRNavigation { get; set; }
+        [InverseProperty(nameof(reservationtype.reservations))]
+        public virtual reservationtype IdTypeRNavigation { get; set; }
         [ForeignKey(nameof(IdUser))]
-        [InverseProperty(nameof(utilisateur.reservations))]
-        public virtual utilisateur IdUserNavigation { get; set; }
+        [InverseProperty(nameof(user.reservations))]
+        public virtual user IdUserNavigation { get; set; }
     }
 }

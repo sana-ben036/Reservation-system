@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ReservationSystem.Models
 {
-    [Table("typereservation")]
-    public partial class typereservation
+    [Table("reservationtype")]
+    public partial class reservationtype
     {
-        public typereservation()
+        public reservationtype()
         {
             planings = new HashSet<planing>();
             reservations = new HashSet<reservation>();

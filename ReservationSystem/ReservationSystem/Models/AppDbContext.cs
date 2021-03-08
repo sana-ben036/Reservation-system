@@ -1,39 +1,35 @@
 ﻿using System;
-using System.Configuration;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
 namespace ReservationSystem.Models
 {
-    public partial class ReservationContext : DbContext
+    public partial class AppDbContext : DbContext
     {
-        private readonly IConfiguration configuration;
-        public ReservationContext()
+        public AppDbContext()
         {
-
         }
 
-        public ReservationContext(DbContextOptions<ReservationContext> options, IConfiguration configuration)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
-            this.configuration = configuration;
         }
 
         public virtual DbSet<planing> planings { get; set; }
         public virtual DbSet<reservation> reservations { get; set; }
+        public virtual DbSet<reservationtype> reservationtypes { get; set; }
         public virtual DbSet<role> roles { get; set; }
-        public virtual DbSet<typereservation> typereservations { get; set; }
-        public virtual DbSet<utilisateur> utilisateurs { get; set; }
-        public virtual DbSet<utilisateur_role> utilisateur_roles { get; set; }
+        public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<user_role> user_roles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL(configuration.GetConnectionString("MySQLConnection"));
+                optionsBuilder.UseMySQL("Name=MySQLConnection");
             }
         }
 
@@ -79,19 +75,19 @@ namespace ReservationSystem.Models
                     .HasConstraintName("reservation_ibfk_3");
             });
 
+            modelBuilder.Entity<reservationtype>(entity =>
+            {
+                entity.HasKey(e => e.IdTypeR)
+                    .HasName("PRIMARY");
+            });
+
             modelBuilder.Entity<role>(entity =>
             {
                 entity.HasKey(e => e.IdRole)
                     .HasName("PRIMARY");
             });
 
-            modelBuilder.Entity<typereservation>(entity =>
-            {
-                entity.HasKey(e => e.IdTypeR)
-                    .HasName("PRIMARY");
-            });
-
-            modelBuilder.Entity<utilisateur>(entity =>
+            modelBuilder.Entity<user>(entity =>
             {
                 entity.HasKey(e => e.IdUser)
                     .HasName("PRIMARY");
@@ -103,22 +99,22 @@ namespace ReservationSystem.Models
                 entity.Property(e => e.Prenom).HasDefaultValueSql("'NULL'");
             });
 
-            modelBuilder.Entity<utilisateur_role>(entity =>
+            modelBuilder.Entity<user_role>(entity =>
             {
                 entity.HasKey(e => new { e.IdUser, e.IdRole })
                     .HasName("PRIMARY");
 
                 entity.HasOne(d => d.IdRoleNavigation)
-                    .WithMany(p => p.utilisateur_roles)
+                    .WithMany(p => p.user_roles)
                     .HasForeignKey(d => d.IdRole)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("utilisateur_role_ibfk_2");
+                    .HasConstraintName("user_role_ibfk_2");
 
                 entity.HasOne(d => d.IdUserNavigation)
-                    .WithMany(p => p.utilisateur_roles)
+                    .WithMany(p => p.user_roles)
                     .HasForeignKey(d => d.IdUser)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("utilisateur_role_ibfk_1");
+                    .HasConstraintName("user_role_ibfk_1");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -1,0 +1,10 @@
+﻿@using ReservationSystem.Models;
+@model IEnumerable<user>
+
+
+@foreach (var item in Model)
+{
+    <p>@item.Nom</p>
+    <p>@item.Prenom</p>
+    <hr />
+}

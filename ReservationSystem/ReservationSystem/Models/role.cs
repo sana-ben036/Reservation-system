@@ -13,7 +13,7 @@ namespace ReservationSystem.Models
     {
         public role()
         {
-            utilisateur_roles = new HashSet<utilisateur_role>();
+            user_roles = new HashSet<user_role>();
         }
 
         [Key]
@@ -23,7 +23,7 @@ namespace ReservationSystem.Models
         [StringLength(60)]
         public string nom { get; set; }
 
-        [InverseProperty(nameof(utilisateur_role.IdRoleNavigation))]
-        public virtual ICollection<utilisateur_role> utilisateur_roles { get; set; }
+        [InverseProperty(nameof(user_role.IdRoleNavigation))]
+        public virtual ICollection<user_role> user_roles { get; set; }
     }
 }

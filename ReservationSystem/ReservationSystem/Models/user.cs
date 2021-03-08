@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ReservationSystem.Models
 {
-    [Table("utilisateur")]
-    public partial class utilisateur
+    [Table("user")]
+    public partial class user 
     {
-        public utilisateur()
+        public user()
         {
             reservations = new HashSet<reservation>();
-            utilisateur_roles = new HashSet<utilisateur_role>();
+            user_roles = new HashSet<user_role>();
         }
 
         [Key]
@@ -32,7 +32,7 @@ namespace ReservationSystem.Models
 
         [InverseProperty(nameof(reservation.IdUserNavigation))]
         public virtual ICollection<reservation> reservations { get; set; }
-        [InverseProperty(nameof(utilisateur_role.IdUserNavigation))]
-        public virtual ICollection<utilisateur_role> utilisateur_roles { get; set; }
+        [InverseProperty(nameof(user_role.IdUserNavigation))]
+        public virtual ICollection<user_role> user_roles { get; set; }
     }
 }

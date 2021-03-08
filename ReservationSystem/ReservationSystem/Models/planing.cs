@@ -31,8 +31,8 @@ namespace ReservationSystem.Models
         public bool IsActive { get; set; }
 
         [ForeignKey(nameof(IdTypeR))]
-        [InverseProperty(nameof(typereservation.planings))]
-        public virtual typereservation IdTypeRNavigation { get; set; }
+        [InverseProperty(nameof(reservationtype.planings))]
+        public virtual reservationtype IdTypeRNavigation { get; set; }
         [InverseProperty(nameof(reservation.IdPlanNavigation))]
         public virtual ICollection<reservation> reservations { get; set; }
     }

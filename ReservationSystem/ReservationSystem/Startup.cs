@@ -26,7 +26,28 @@ namespace ReservationSystem
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ReservationContext>(options => options.UseMySQL(configuration.GetConnectionString("MySQLConnection")));
+            services.AddDbContext<AppDbContext>(options => options.UseMySQL(configuration.GetConnectionString("MySQLConnection")));
+
+            //services.AddIdentity<user, role>().AddEntityFrameworkStores<AppDbContext>();
+
+            services.AddMvc(options =>
+            {
+                options.EnableEndpointRouting = false;  // for accept ouwn default routing
+                
+            });
+
+
+            //should install package : microsoft.aspnetcore.authentication.google
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = "821422014065-qbrbbgbqaensm4fpddvv55mbj21gvmbc.apps.googleusercontent.com";
+                    options.ClientSecret = "Tn8Qj35FIpiqVX5IoMwePbcm";
+
+                });
+
+
+           
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -36,15 +57,29 @@ namespace ReservationSystem
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseFileServer();
+
+            app.UseAuthentication();
+
+            app.UseMvcWithDefaultRoute();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default", "{controller=User}/{action=login}/{id ?}");
+            });
+
+
+
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapGet("/", async context =>
+            //    {
+            //        await context.Response.WriteAsync("Hello World!");
+            //    });
+            //});
         }
     }
 }
