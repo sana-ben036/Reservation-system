@@ -50,9 +50,13 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
-            "Pomelo.EntityFrameworkCore.MySql": {
+            "MySql.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.0-alpha.2, )"
+              "version": "[5.0.0, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [

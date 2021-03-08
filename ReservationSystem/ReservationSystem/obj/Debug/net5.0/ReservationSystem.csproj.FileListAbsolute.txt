@@ -12,8 +12,6 @@ C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\R
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\MySqlConnector.dll
-C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\ReservationSystem.csprojAssemblyReference.cache
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\ReservationSystem.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\ReservationSystem.AssemblyInfoInputs.cache
@@ -29,3 +27,17 @@ C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\R
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\ref\ReservationSystem.dll
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\ReservationSystem.pdb
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\ReservationSystem.genruntimeconfig.cache
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Google.Protobuf.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\K4os.Compression.LZ4.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\K4os.Compression.LZ4.Streams.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\K4os.Hash.xxHash.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\MySql.Data.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Ubiety.Dns.Core.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Zstandard.Net.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\MySql.EntityFrameworkCore.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Renci.SshNet.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\SshNet.Security.Cryptography.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
