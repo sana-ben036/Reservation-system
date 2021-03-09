@@ -1,32 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-
-#nullable disable
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ReservationSystem.Models
 {
-    [Table("reservationtype")]
-    public partial class reservationtype
+    public class ReservationType
     {
-        public reservationtype()
-        {
-            planings = new HashSet<planing>();
-            reservations = new HashSet<reservation>();
-        }
-
         [Key]
-        [Column(TypeName = "int(11)")]
-        public int IdTypeR { get; set; }
-        [Required]
-        [StringLength(100)]
-        public string nom { get; set; }
+        public int IdType { get; set; }
 
-        [InverseProperty(nameof(planing.IdTypeRNavigation))]
-        public virtual ICollection<planing> planings { get; set; }
-        [InverseProperty(nameof(reservation.IdTypeRNavigation))]
-        public virtual ICollection<reservation> reservations { get; set; }
+        [Required(ErrorMessage = "The Type name field is required !")]
+        [Display(Name = "Enter The Name")]
+        public string TypeName { get; set; }
+        public int AccessNbr { get; set; }
     }
 }

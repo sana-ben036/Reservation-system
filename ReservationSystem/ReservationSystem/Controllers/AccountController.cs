@@ -1,62 +1,37 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ReservationSystem.Models;
 using ReservationSystem.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ReservationSystem.Controllers
 {
-    public class UserController : Controller
+    public class AccountController : Controller
     {
 
-        private readonly AppDbContext context;
-        private readonly SignInManager<user> signInManager;
-        private readonly UserManager<user> userManager;
-        public UserController(AppDbContext context , SignInManager<user> signInManager, UserManager<user> userManager)
+        private readonly UserManager<AppUser> userManager;
+        private readonly SignInManager<AppUser> signInManager;
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
-            this.context = context;
-            this.signInManager = signInManager;
             this.userManager = userManager;
+            this.signInManager = signInManager;
+
         }
 
 
-        //Actions
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<user>>> List()
-        {
-            var result = await context.users.ToListAsync();
-            return View(result);
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<user>> Details(int id)
-        {
-            var user = await context.users.FindAsync(id);
-            if (user is null)
-            {
-                return NotFound();
-            }
-            return View(user);
-        }
 
 
         // external login
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Login(string returnUrl)
         {
-            UserLoginViewModel model = new UserLoginViewModel
+            AccountLoginViewModel model = new AccountLoginViewModel
             {
                 ReturnUrl = returnUrl,
                 ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
@@ -67,7 +42,6 @@ namespace ReservationSystem.Controllers
         }
 
 
-        [AllowAnonymous]
         [HttpPost]
         public IActionResult ExternalLogin(string provider, string returnUrl)
         {
@@ -77,11 +51,10 @@ namespace ReservationSystem.Controllers
         }
 
 
-        [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-            UserLoginViewModel model = new UserLoginViewModel
+            AccountLoginViewModel model = new AccountLoginViewModel
             {
                 ReturnUrl = returnUrl,
                 ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
@@ -105,29 +78,29 @@ namespace ReservationSystem.Controllers
             }
             else
             {
-                //var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                //if (email != null)
-                //{
-                //    var user = await userManager.FindByEmailAsync(email);
-                //    if (user == null)
-                //    {
-                //        user = new AppUser
-                //        {
-                //            UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
-                //            Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                if (email != null)
+                {
+                    var user = await userManager.FindByEmailAsync(email);
+                    if (user == null)
+                    {
+                        user = new AppUser
+                        {
+                            UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
+                            Email = info.Principal.FindFirstValue(ClaimTypes.Email)
 
-                //        };
+                        };
 
-                //        await userManager.CreateAsync(user);
-                //    }
+                        await userManager.CreateAsync(user);
+                    }
 
-                //    await userManager.AddLoginAsync(user, info);
-                //    await signInManager.SignInAsync(user, isPersistent: false);
-                //    return LocalRedirect(returnUrl);
-                //}
+                    await userManager.AddLoginAsync(user, info);
+                    await signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnUrl);
+                }
 
-                //ViewBag.ErrorTitle = $"Email claim not received from : {info.LoginProvider}";
-                //ViewBag.ErrorMessage = "Please contact support on sana.bengannoune@gmail.com";
+                ViewBag.ErrorTitle = $"Email claim not received from : {info.LoginProvider}";
+                ViewBag.ErrorMessage = "Please contact support on sana.bengannoune@gmail.com";
 
                 return View("Error");
             }
@@ -137,13 +110,6 @@ namespace ReservationSystem.Controllers
 
 
         }
-
-
-
-
-
-
-
 
     }
 }

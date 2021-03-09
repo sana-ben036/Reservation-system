@@ -1,44 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-
-#nullable disable
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ReservationSystem.Models
 {
-    [Table("reservation")]
-    [Index(nameof(IdPlan), Name = "IdPlan")]
-    [Index(nameof(IdTypeR), Name = "IdTypeR")]
-    [Index(nameof(IdUser), Name = "IdUser")]
-    public partial class reservation
+    public class Reservation
     {
         [Key]
-        [Column(TypeName = "int(11)")]
         public int IdRe { get; set; }
-        [Column(TypeName = "int(11)")]
-        public int IdTypeR { get; set; }
-        [Column(TypeName = "int(11)")]
-        public int IdPlan { get; set; }
-        [Column(TypeName = "int(11)")]
-        public int IdUser { get; set; }
-        [Column(TypeName = "date")]
-        public DateTime Date_demande { get; set; }
-        [Column(TypeName = "date")]
-        public DateTime Date_reseration { get; set; }
+        public DateTime Date { get; set; }
         [Required]
-        [StringLength(60)]
+        [Display(Name = "Reservation Date")]
+        public string Date_R { get; set; }
         public string Status { get; set; }
-
-        [ForeignKey(nameof(IdPlan))]
-        [InverseProperty(nameof(planing.reservations))]
-        public virtual planing IdPlanNavigation { get; set; }
-        [ForeignKey(nameof(IdTypeR))]
-        [InverseProperty(nameof(reservationtype.reservations))]
-        public virtual reservationtype IdTypeRNavigation { get; set; }
-        [ForeignKey(nameof(IdUser))]
-        [InverseProperty(nameof(user.reservations))]
-        public virtual user IdUserNavigation { get; set; }
+        [Required]
+        public ReservationType Type { get; set; }
     }
 }

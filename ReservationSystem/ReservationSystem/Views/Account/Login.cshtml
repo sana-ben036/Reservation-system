@@ -1,0 +1,25 @@
+﻿@using ReservationSystem.Models.ViewModels 
+@model AccountLoginViewModel
+
+@{
+
+    ViewBag.Title = "ReservationSYS  | Login";
+
+}
+
+
+
+        <h1 class="text text-dark my-4  text-left">Login Portal</h1>
+        <hr />
+
+        <form class="mx-lg-auto w-50 m-auto" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div>
+                <button type="submit" class="btn btn-light  bg-danger text-white w-100"
+                        name="provider" value="Google"
+                        title="Login using your Google account">
+                    GOOGLE
+                </button>
+            </div>
+            
+
+        </form>

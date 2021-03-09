@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace ReservationSystem.Models.ViewModels
 {
-    public class UserLoginViewModel
+    public class AccountLoginViewModel
     {
-        
-
         public string ReturnUrl { get; set; }
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
-
     }
 }
