@@ -12,8 +12,29 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
+#nullable restore
+#line 1 "C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\Views\_ViewImports.cshtml"
+using ReservationSystem.Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 2 "C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\Views\_ViewImports.cshtml"
+using ReservationSystem.Models.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ddb1ec41dac68533410e600a7dccda9eec569f53", @"/Views/Account/Dashboard.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f8976ee806691153d5a29335ac66e0618bea694c", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"20238c27fd8c868e82114ce684cccafa7ca310fc", @"/Views/_ViewImports.cshtml")]
     public class Views_Account_Dashboard : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

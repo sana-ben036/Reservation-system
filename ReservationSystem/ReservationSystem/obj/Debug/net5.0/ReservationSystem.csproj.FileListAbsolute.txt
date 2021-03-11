@@ -50,3 +50,13 @@ C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\R
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Pomelo.JsonObject.dll
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\ReservationType\Index.cshtml.g.cs
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\ReservationType\Create.cshtml.g.cs
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\ReservationType\Edit.cshtml.g.cs
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\libman.json
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Role\Create.cshtml.g.cs
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Role\Edit.cshtml.g.cs
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Role\EditUsersRole.cshtml.g.cs
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Role\Error.cshtml.g.cs
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Role\Index.cshtml.g.cs
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Account\Index.cshtml.g.cs

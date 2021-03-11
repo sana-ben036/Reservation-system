@@ -9,7 +9,7 @@ namespace ReservationSystem.Models
     public class Role
     {
         [Required(ErrorMessage = "The role name field is required !")]
-        [Display(Name = "Enter The Name")]
+        [Display(Name = "Enter the name")]
         public string RoleName { get; set; }
     }
 }

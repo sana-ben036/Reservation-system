@@ -1,2 +1,15 @@
-﻿
-Not found
+﻿@model string
+@{
+    ViewBag.Title = "404 Error";
+}
+
+<div class="jumbotron my-5">
+    <h1 class="display-4 text-danger">404 Not Found Error</h1>
+    <p class="lead">
+        @Model
+
+    </p>
+    <hr class="my-4" />
+    <a asp-controller="ReservationType" asp-action="Index">Back To Home </a>
+
+</div>

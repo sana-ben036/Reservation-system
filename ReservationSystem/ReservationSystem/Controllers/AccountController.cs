@@ -111,5 +111,51 @@ namespace ReservationSystem.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Login");
+        }
+
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+
+            var users = userManager.Users.Where(u => u.Email != User.Identity.Name);
+
+            return View(users);
+        }
+
+
+        [HttpGet]
+        public IActionResult DeleteUser()
+        {
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            AppUser user = await userManager.FindByIdAsync(id);
+            if (user is null)
+            {
+
+                return View("../Errors/NotFound", $"The user Id : {id} cannot be found");
+            }
+
+            IdentityResult result = await userManager.DeleteAsync(user);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

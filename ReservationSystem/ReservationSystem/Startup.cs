@@ -66,7 +66,7 @@ namespace ReservationSystem
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute("default", "{controller=User}/{action=login}/{id ?}");
+                routes.MapRoute("default", "{controller=Account}/{action=login}/{id ?}");
             });
 
 
