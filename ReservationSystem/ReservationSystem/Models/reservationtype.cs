@@ -20,6 +20,6 @@ namespace ReservationSystem.Models
         [Required(ErrorMessage = "The number of students field is required !")]
         [Display(Name = "Number of Students ")]
         public int NumberA { get; set; }
-        public IList<Reservation> Reservations { get; set; }
+        public virtual IList<Reservation> Reservations { get; set; }
     }
 }

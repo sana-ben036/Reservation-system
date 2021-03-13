@@ -2,7 +2,7 @@
 
 @{
     int counter = 1;
-    ViewBag.Title = "ReservationSYS  | Types";
+    ViewBag.Title = "ReservationSYS | Types";
 }
 
 <div class="my-2 text-left col-12">
@@ -10,46 +10,61 @@
     <hr />
 </div>
 
-<table class="table table-hover text-center my-5">
-    <thead class="text-white" style="background-color:#44426B">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Date</th>
-            <th scope="col">Type</th>
-            <th scope="col">Access limited</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            foreach (var type in Model)
-            {
-                <tr>
-                    <td>@counter</td>
-                    <td>@Html.DisplayFor(modelItem=>type.Date)</td>
-                    <td>@type.Name</td>
-                    <td>@type.NumberA</td>
+<div class="mx-lg-auto my-5 col-12 ">
+    <table id="TypesTable" class ="table table-hover text-center ">
+        <thead class="text-white" style="background-color:#44426B">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Type</th>
+                <th scope="col">Access limited</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var type in Model)
+                {
+                    <tr>
+                        <td>@counter</td>
+                        <td>@Html.DisplayFor(modelItem => type.Date)</td>
+                        <td>@type.Name</td>
+                        <td>@type.NumberA</td>
 
-                    <td>
+                        <td>
 
-                        <form method="post" asp-action="Delete" asp-controller="ReservationType" asp-route-id="@type.Id">
-                            <a class="btn btn-primary text-white btn-sm" asp-action="Edit" asp-controller="ReservationType" asp-route-id="@type.Id">Update</a>
-                            <button type="submit" class="btn btn-dark btn-sm" onclick="return confirm('Are you sure to Delete ??')">Delete</button>
-                        </form>
+                            <form method="post" asp-action="Delete" asp-controller="ReservationType" asp-route-id="@type.Id">
+                                <a class="btn btn-primary text-white btn-sm" asp-action="Edit" asp-controller="ReservationType" asp-route-id="@type.Id">Update</a>
+                                <button type="submit" class="btn btn-dark btn-sm" onclick="return confirm('Are you sure to Delete ??')">Delete</button>
+                            </form>
 
 
-                    </td>
-                </tr>
-                counter++;
+                        </td>
+                    </tr>
+                    counter++;
 
+                }
             }
-        }
 
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+
+</div>
+
 
 <div class="my-5 text-center">
     <a asp-action="Create">Add New Type</a> |
-    <a asp-action="Home">Back To Home</a>
+    <a asp-action="login" asp-controller="Account">Back To Home</a>
 </div>
+
+@section DTListTypes{
+    <script>
+        $(document).ready(function () {
+            $('#TypesTable').dataTable();
+        });
+
+
+    </script>
+
+}

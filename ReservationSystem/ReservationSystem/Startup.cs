@@ -35,7 +35,7 @@ namespace ReservationSystem
             {
                 options.EnableEndpointRouting = false;  // for accept ouwn default routing
                 
-            });
+            }).AddXmlSerializerFormatters();
 
 
             //should install package : microsoft.aspnetcore.authentication.google

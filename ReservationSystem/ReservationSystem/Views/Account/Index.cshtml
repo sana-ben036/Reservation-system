@@ -10,47 +10,47 @@
     <hr />
 </div>
 
-<table id="UsersTable" class="table table-hover text-center my-5 ">
-    <thead class="text-white" style="background-color:#44426B">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">@Html.DisplayNameFor(item => item.FirstName)</th>
-            <th scope="col">@Html.DisplayNameFor(item => item.LastName)</th>
-            <th scope="col">@Html.DisplayNameFor(item => item.Email)</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (AppUser user in Model)
-        {
+<div class= "mx-lg-auto my-5 col-12">
+    <table id="UsersTable" class="table table-hover text-center ">
+        <thead class="text-white" style="background-color:#44426B">
             <tr>
-                <td>@counter</td>
-                <td>@user.FirstName</td>
-                <td>@user.LastName</td>
-                <td>@user.Email</td>
-
-                <td>
-                    <form method="post" asp-action="Delete" asp-controller="Account" asp-route-id="@user.Id">
-                        <a class="btn btn-primary text-white btn-sm" asp-action="Edit" asp-controller="Account" asp-route-id="@user.Id">Update</a>
-                        <button type="submit" class="btn btn-dark btn-sm" onclick="return confirm('Are you sure ??')">Delete</button>
-                    </form>
-
-                </td>
+                <th scope="col">#</th>
+                <th scope="col">@Html.DisplayNameFor(item => item.FirstName)</th>
+                <th scope="col">@Html.DisplayNameFor(item => item.LastName)</th>
+                <th scope="col">@Html.DisplayNameFor(item => item.Email)</th>
+                <th scope="col">Actions</th>
             </tr>
-            counter++;
+        </thead>
+        <tbody>
+            @foreach (AppUser user in Model)
+            {
+                <tr>
+                    <td>@counter</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
 
-        }
+                    <td>
+                        <form method="post" asp-action="DeleteUser" asp-controller="Account" asp-route-id="@user.Id">
+                            <a class="btn btn-primary text-white btn-sm" asp-action="EditUser" asp-controller="Account" asp-route-id="@user.Id">Update</a>
+                            <button type="submit" class="btn btn-dark btn-sm" onclick="return confirm('Are you sure ??')">Delete</button>
+                        </form>
+
+                    </td>
+                </tr>
+                counter++;
+
+            }
 
 
-    </tbody>
-</table>
-
-<div class="my-5 text-left col-12">
-    @*<a asp-action="Register">Add New User</a> |*@
-    <a asp-action="Index" asp-controller="Account">Back To Home</a>
+        </tbody>
+    </table>
 </div>
 
-<div class=" my-3 text-danger" asp-validation-summary="All"></div>
+<div class="my-5 text-center ">
+    @*<a asp-action="Register">Add New User</a> |*@
+    <a  asp-action="Login" asp-controller="Account">Back To Home</a>
+</div>
 
 @section DTListUsers{
     <script>

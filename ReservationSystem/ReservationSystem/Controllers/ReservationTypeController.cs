@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReservationSystem.Models;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ReservationSystem.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ReservationTypeController : Controller
     {
         private readonly AppDbContext _context;
@@ -46,16 +48,14 @@ namespace ReservationSystem.Controllers
         [HttpPost]
         public ActionResult Create(ReservationType model)
         {
-            try
+            if(ModelState.IsValid )
             {
                 _context.ReservationTypes.Add(model);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(model);
+            
         }
 
         // GET: ReservationTypeController/Edit/5
@@ -77,19 +77,16 @@ namespace ReservationSystem.Controllers
 
         // POST: ReservationTypeController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, ReservationType type)
         {
-            try
+            if(ModelState.IsValid)
             {
                 _context.Entry(type).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
+                
             }
-            catch
-            {
-                return View();
-            }
+            return View(type);
         }
 
         // GET: ReservationTypeController/Delete/5
@@ -100,26 +97,17 @@ namespace ReservationSystem.Controllers
 
         // POST: ReservationTypeController/Delete/5
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public ActionResult Delete(int? id)
         {
-            try
+            var type = _context.ReservationTypes.Find(id);
+            if (type is null)
             {
-          
-                var type = _context.ReservationTypes.Find(id);
-                if (type is null)
-                {
-                    return View("../Error/NotFound", $"The type Id : {id} cannot be found");
-                }
+                return View("../Error/NotFound", $"The type Id : {id} cannot be found");
+            }
 
-                _context.Remove(type);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _context.Remove(type);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

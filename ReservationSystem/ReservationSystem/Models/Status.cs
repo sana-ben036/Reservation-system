@@ -8,9 +8,9 @@ namespace ReservationSystem.Models
     public enum Status
     {
 
-        EnCours,
-        Rejetée,
-        Acceptée
+        InProgress,
+        Rejected,
+        Accepted
 
 
 

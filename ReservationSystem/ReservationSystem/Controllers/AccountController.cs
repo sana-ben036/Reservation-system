@@ -25,10 +25,10 @@ namespace ReservationSystem.Controllers
 
 
 
-
         // external login
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl)
         {
             AccountLoginViewModel model = new AccountLoginViewModel
@@ -41,8 +41,8 @@ namespace ReservationSystem.Controllers
 
         }
 
-
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult ExternalLogin(string provider, string returnUrl)
         {
             var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
@@ -51,6 +51,7 @@ namespace ReservationSystem.Controllers
         }
 
 
+        [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -109,6 +110,127 @@ namespace ReservationSystem.Controllers
 
 
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditAccount(string id)
+        {
+            if (!string.IsNullOrEmpty(id))
+            {
+                AppUser user = await userManager.FindByIdAsync(id);
+                if (user != null)
+                {
+                    var model = new AppUser()
+                    {
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        
+                    };
+                    return View(model);
+                }
+            }
+            return RedirectToAction("Login");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditAccount(AppUser model)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUser user = await userManager.FindByIdAsync(model.Id);
+                if (user != null)
+                {
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    
+
+
+                    IdentityResult result = await userManager.UpdateAsync(user);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Login");
+                    }
+                    foreach (IdentityError error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+
+                }
+            }
+            return View(model);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            AppUser user = await userManager.FindByIdAsync(id);
+            if (user is null)
+            {
+
+                return View("../Error/NotFound", $"The user Id : {id} cannot be found");
+            }
+
+            var userRoles = await userManager.GetRolesAsync(user);
+
+            AccountEditUserViewModel model = new AccountEditUserViewModel()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Id = user.Id,
+                Email = user.Email,
+                Roles = userRoles,
+            };
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(AccountEditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUser user = await userManager.FindByIdAsync(model.Id);
+                if (user is null)
+                {
+
+                    return View("../Errors/NotFound", $"The user Id : {model.Id} cannot be found");
+                }
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Email = model.Email;
+
+
+                IdentityResult result = await userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+
+            }
+            
+            return View(model);
+        }
+
+        
+
+        [HttpGet]
+        public IActionResult AccessDenied(string returnUrl)
+        {
+            ViewBag.Message = "You don't have permission to access this resource";
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+            {
+                ViewBag.Message += "\nPath : " + returnUrl;
+            }
+
+            return View();
         }
 
         [HttpPost]

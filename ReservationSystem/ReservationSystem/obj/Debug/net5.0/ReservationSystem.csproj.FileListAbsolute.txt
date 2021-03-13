@@ -41,8 +41,6 @@ C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\R
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Google.dll
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Error\NotFound.cshtml.g.cs
-C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Account\Dashboard.cshtml.g.cs
-C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Account\Error.cshtml.g.cs
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\bin\Debug\net5.0\Microsoft.Bcl.HashCode.dll
@@ -60,3 +58,8 @@ C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\R
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Role\Error.cshtml.g.cs
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Role\Index.cshtml.g.cs
 C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Account\Index.cshtml.g.cs
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Reservation\Index.cshtml.g.cs
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Reservation\Create.cshtml.g.cs
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Account\AccessDenied.cshtml.g.cs
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Account\EditAccount.cshtml.g.cs
+C:\Users\youcode\source\repos\sana-ben036\ReservationProject\ReservationSystem\ReservationSystem\obj\Debug\net5.0\Razor\Views\Account\EditUser.cshtml.g.cs

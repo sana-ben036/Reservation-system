@@ -1,61 +1,105 @@
-﻿@model AccountLoginViewModel
+﻿@inject UserManager<AppUser> userManager
+@inject SignInManager<AppUser> signInManager
+@model AccountLoginViewModel
 
-@{
 
+
+
+
+@if (!signInManager.IsSignedIn(User))
+{
     ViewBag.Title = "ReservationSYS  | Login";
+
+
+    <div class="col-12 my-2 text-left">
+        <h2>Login Portal</h2>
+        <hr />
+    </div>
+    <form class="mx-lg-auto my-5 w-50" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div>
+            <button type="submit" class="btn text-danger w-75"
+                    style="border-color:#1B098A"
+                    name="provider" value="Google"
+                    title="Login using your Google account">
+                Google Account
+            </button><br /><br />
+            <p>You don't have a Google account? <a href="https://accounts.google.com/signup/v2/webcreateaccount?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F%3Fpc%3Dtopnav-about-n-en&flowName=GlifWebSignIn&flowEntry=SignUp">Create Account.</a></p>
+
+
+        </div>
+        <div hidden>
+            <button type="submit" class="btn btn-light  bg-primary text-white w-75"
+                    name="provider" value="Facebook"
+                    title="Login using your Facebook account">
+                FACEBOOK
+            </button><br /><br />
+        </div>
+
+    </form>
+}
+
+
+@if (signInManager.IsSignedIn(User) && (User.IsInRole("Student") || User.IsInRole("Admin")))
+{
+    AppUser user = await userManager.FindByEmailAsync(User.Identity.Name);
+
+    ViewBag.Title = "ReservationSYS  | Welcome";
+
+    <div class="col-12 my-2 text-left">
+        <h2>Authentication</h2>
+        <hr />
+    </div>
+
+    <div class=" my-5">
+        <h2 class="display-5 text-success">Account Confirmed</h2>
+        <p>
+
+            Your Email: <span class="text-primary">@user.Email </span> , is Now Confirmed.<br />
+            Good navigation to our services...<br />
+
+
+        </p>
+        <hr class="my-4" />
+        <a asp-controller="Account" asp-action="EditAccount"  asp-route-id="@user.Id">Edit Your Account </a>
+
+    </div>
+
+}
+@if (signInManager.IsSignedIn(User) && !(User.IsInRole("Student") || User.IsInRole("Admin")))
+{
+    AppUser user = await userManager.FindByEmailAsync(User.Identity.Name);
+
+    ViewBag.Title = "ReservationSYS  | Welcome";
+
+    <div class="col-12 my-2 text-left">
+        <h2>Authentication</h2>
+        <hr />
+    </div>
+
+    <div class=" my-5">
+        <h2 class="display-5 text-danger">Account Not Confirmed</h2>
+        <p>
+
+            Your Email: <span class="text-primary">@user.Email </span>, is not yet Confirmed. Try to connect again later .<br />
+            For more information, contact the administration or our support on the email below....<br />
+            <span class="text-primary">Admin@gmail.com</span>
+
+
+        </p>
+        <hr class="my-4" />
+        <a asp-controller="Account" asp-action="EditAccount"  asp-route-id="@user.Id">Edit Your Account </a> 
+
+    </div>
 
 }
 
 
 
-<div class="col-12 my-2 text-left">
-    <h2 >Login Portal</h2>
-    <hr  />
-</div>
-<form class="mx-lg-auto my-5 w-50" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-    <div>
-        <button type="submit" class="btn text-danger w-75"
-                style="border-color:#1B098A"
-                name="provider" value="Google"
-                title="Login using your Google account">
-            Google Account
-        </button><br /><br />
-        <p>You don't have a Google account? <a href="https://accounts.google.com/signup/v2/webcreateaccount?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F%3Fpc%3Dtopnav-about-n-en&flowName=GlifWebSignIn&flowEntry=SignUp">Create Account.</a></p>
 
 
-    </div>
-    <div hidden>
-        <button type="submit" class="btn btn-light  bg-primary text-white w-75"
-                name="provider" value="Facebook"
-                title="Login using your Facebook account">
-            FACEBOOK
-        </button><br /><br />
-    </div>
-
-</form>
-
-        
 
 
-        @*@{
-                <form class="mx-lg-auto w-50 m-auto" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                    <div>
-                        @foreach (var provider in Model.ExternalLogins)
-                        {
-                            <button type="submit" class="btn btn-primary w-100"
-                                    name="provider" value="@provider.Name"
-                                    title="Login using your @provider.DisplayName account">
-                                @provider.DisplayName
-                            </button><br /><br />
-                        }
-                    </div>
-                </form>
-            }*@
 
-
-        
-
-    
 
 
 

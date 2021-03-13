@@ -42,36 +42,55 @@
 
 
             </environment>
-
+            
         </head>
         <body class="row" style="height:740px;color:#1B098A">
 
-            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-            {
-                AppUser user = await userManager.FindByEmailAsync(User.Identity.Name);
+            <ul class="nav flex-column col-md-2 text-white " style="padding:10px;background-color:#44426B">
+                <li class="nav-item">
+                    <a class="nav-link text-white font-weight-bolder " href="#">RESERVATION SYSTEM</a>
+                    <br />
+                    <br />
+                </li>
+                @if (signInManager.IsSignedIn(User))
+                {
+                    AppUser user = await userManager.FindByEmailAsync(User.Identity.Name);
 
-                <ul class="nav flex-column col-md-2 text-white " style="padding:10px;background-color:#44426B">
-                    <li class="nav-item">
-                        <a class="nav-link text-white font-weight-bolder " href="#">RESERVATION SYSTEM</a>
-                        <br />
-                        <br />
-                    </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">@user.Email</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Manage Account</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-route-id="@user.Id" asp-action="EditAccount" asp-controller="Account">Edit Account</a>
+                            <div>
+                                <ul class="navbar nav">
+                                    <li class="nav-item ">
+                                        <form asp-action="Logout" asp-controller="Account" method="post">
+                                            <button type="submit" class="btn btn-primary text-white" style="width:10em">
+                                                Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         <hr />
                     </li>
+
+                }
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+
 
                     <li class="nav-item">
                         <a class="nav-link" asp-action="Index" asp-controller="Reservation">Manage Reservations</a>
                         <hr />
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Manage Type</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Manage Types</a>
                         <hr />
                         <div class="dropdown-menu">
                             <a class="dropdown-item" asp-action="Index" asp-controller="ReservationType">Types</a>
-                            <a class="dropdown-item" asp-action="Create" asp-controller="ReservationType">Add new Type</a>
+                            <a class="dropdown-item" asp-action="Create" asp-controller="ReservationType">New Type</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -82,52 +101,21 @@
                             <a class="dropdown-item" asp-action="Index" asp-controller="Account">Users</a>
                         </div>
                     </li>
-                    <li class="nav-item ">
-                        <form asp-action="Logout" asp-controller="Account" method="post" class="mx-lg-auto my-2 w-50">
-                            <button type="submit" class="btn btn-primary  ">
-                                LOGOUT
-                            </button>
 
-                        </form>
-                    </li>
-                </ul>
-            }
-            @if (signInManager.IsSignedIn(User) && User.IsInRole("Student"))
-            {
-                AppUser user = await userManager.FindByEmailAsync(User.Identity.Name);
+                }
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Student"))
+                {
 
-                <ul class="nav flex-column col-md-2 text-white " style="padding:10px;background-color:#44426B">
-                    <li class="nav-item">
-                        <a class="nav-link text-white font-weight-bolder " href="#">RESERVATION SYSTEM</a>
-                        <br />
-                        <br />
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">@user.Email</a>
-                        <hr />
-                    </li>
-
-                    
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Manage Demande</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Manage Reservations</a>
                         <hr />
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" asp-action="Index" asp-controller="Reservation">Demandes</a>
-                            <a class="dropdown-item" asp-action="Create" asp-controller="Reservation">Add new Demande</a>
+                            <a class="dropdown-item" asp-action="Index" asp-controller="Reservation">Reservations</a>
+                            <a class="dropdown-item" asp-action="Create" asp-controller="Reservation">New Reservation</a>
                         </div>
                     </li>
-                    
-                    <li class="nav-item ">
-                        <form asp-action="Logout" asp-controller="Account" method="post" class="mx-lg-auto my-2 w-50">
-                            <button type="submit" class="btn btn-primary  ">
-                                LOGOUT
-                            </button>
-
-                        </form>
-                    </li>
-                </ul>
-            }
+                }
+            </ul>
 
             <div class="col-md-10 h-100">
 
@@ -135,8 +123,10 @@
                     @RenderBody()
                 </section>
 
-
             </div>
             @RenderSection(name: "DTListUsers", required: false);
+            @RenderSection(name: "DTListRoles", required: false);
+            @RenderSection(name: "DTListTypes", required: false);
+            @RenderSection(name: "DTListReservations", required: false);
         </body>
     </html>
