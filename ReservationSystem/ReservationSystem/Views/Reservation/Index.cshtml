@@ -11,14 +11,20 @@
     <hr />
 </div>
 
-<div class="mx-lg-auto my-5 col-12 ">
+<div class="mx-lg-auto my-2 col-12 ">
     <table id="ReservationssTable" class="table table-hover text-center">
         <thead class="text-white" style="background-color:#44426B">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Reserved day</th>
+                <th scope="col">Reserved Day</th>
                 <th scope="col">Type</th>
-                <th scope="col">Student</th>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <th scope="col">Student</th>
+                    <th scope="col">NRA</th>
+                }
+
                 <th scope="col">Status</th>
                 <th scope="col">Actions</th>
             </tr>
@@ -29,20 +35,38 @@
                 {
                     <tr>
                         <td>@counter</td>
-                        <td>@reservation.Date_R</td>
-                        <td>@reservation.TypeId</td>
-                        <td>@reservation.User</td>
+                        <td>@reservation.Date_R.ToShortDateString()</td>
+                        <td>@reservation.Type.Name</td>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>@reservation.User.UserName</td>
+                            <td>@reservation.User.NRA</td>
+                        }
                         <td>@reservation.Status</td>
 
-                        <td>
+                        @if (reservation.Status == 0 || User.IsInRole("Admin"))
+                        {
+                            <td>
 
-                            <form method="post" asp-action="Delete" asp-controller="Reservation" asp-route-id="@reservation.Id">
-                                <a class="btn btn-primary text-white btn-sm" asp-action="Edit" asp-controller="Reservation" asp-route-id="@reservation.Id">Update</a>
-                                <button type="submit" class="btn btn-dark btn-sm" onclick="return confirm('Are you sure to Delete ??')">Delete</button>
-                            </form>
+                                <form method="post" asp-action="Delete" asp-controller="Reservation" asp-route-id="@reservation.Id">
+                                    <a class="btn btn-primary text-white btn-sm" asp-action="Edit" asp-controller="Reservation" asp-route-id="@reservation.Id">Update</a>
+                                    <button type="submit" class="btn btn-dark btn-sm" onclick="return confirm('Are you sure to Delete ??')">Delete</button>
+                                </form>
 
 
-                        </td>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+
+                                _
+
+
+                            </td>
+                        }
+
                     </tr>
                     counter++;
 
@@ -54,10 +78,23 @@
     </table>
 </div>
 
-<div class="my-5 text-center">
-    <a asp-action="Create">New Reservation</a> |
-    <a asp-controller="Account" asp-action="login">Back To Home</a>
-</div>
+
+@if (User.IsInRole("Student"))
+{
+    <div class="my-5 text-center">
+        <a asp-action="Create">New Reservation</a> |
+        <a asp-controller="Account" asp-action="login">Back To Home</a>
+    </div>
+}
+else
+{
+    <div class="my-5 text-center">
+        <a asp-controller="Account" asp-action="login">Back To Home</a>
+    </div>
+}
+
+
+
 
 @section DTListReservations{
     <script>

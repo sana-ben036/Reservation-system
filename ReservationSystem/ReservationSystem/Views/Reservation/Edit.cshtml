@@ -1,0 +1,88 @@
+﻿@inject UserManager<AppUser> userManager
+@inject SignInManager<AppUser> signInManager
+@model Reservation
+
+@{
+
+    ViewBag.Title = "ReservationSYS  | Edit Reservation";
+
+}
+
+<div class="my-2 text-left col-12">
+    <h2> Edit Reservation Details </h2>
+    <hr />
+</div>
+
+@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+<form class="mx-lg-auto my-5 w-50" method="post">
+    <input hidden asp-for="Id">
+    <input hidden asp-for="UserId">
+    <div hidden class="form-group">
+        <label asp-for="Date_R"></label>
+        <input type="datetime-local" class="form-control"
+               asp-for="Date_R"
+               min="2020-06-07T00:00" max="2022-06-14T00:00">
+        <span asp-validation-for="Date_R" hidden class="small text-danger"></span>
+    </div>
+    <div hidden class="form-group">
+        <label asp-for="TypeId"></label>
+        <select asp-for="TypeId" class="form-control">
+            <option value="">Select Type...</option>
+            @foreach (ReservationType type in ViewBag.Types)
+            {
+                <option value="@type.Id">@type.Name</option>
+            }
+
+        </select>
+        <span asp-validation-for="Type" hidden class="small text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <select class="form-control custom-select"
+                asp-for="Status"
+                asp-items="Html.GetEnumSelectList<Status>()">
+            <option value="">Choisir Filiére ...</option>
+        </select>
+        <span asp-validation-for="Status" class="small text-danger"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <div asp-validation-summary="All" class="text-danger"></div>
+</form>
+}
+@if (signInManager.IsSignedIn(User) && User.IsInRole("Student"))
+{
+<form class="mx-lg-auto my-5 w-50" method="post">
+    <input hidden asp-for="Id">
+    <input hidden asp-for="UserId">
+
+    <div class="form-group">
+        <label asp-for="TypeId"></label>
+        <select asp-for="TypeId" class="form-control">
+            <option value="">Select Type...</option>
+            @foreach (ReservationType type in ViewBag.Types)
+            {
+                <option value="@type.Id">@type.Name</option>
+            }
+
+        </select>
+        <span asp-validation-for="Type" hidden class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Date_R"></label>
+        <input type="datetime-local" class="form-control"
+               asp-for="Date_R"
+               min="2020-06-07T00:00" max="2022-06-14T00:00">
+        <span asp-validation-for="Date_R" hidden class="small text-danger"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+</form>
+}
+

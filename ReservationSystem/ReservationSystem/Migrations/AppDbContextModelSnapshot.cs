@@ -176,6 +176,9 @@ namespace ReservationSystem.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int>("NRA")
+                        .HasColumnType("int");
+
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
                         .HasMaxLength(256);
@@ -224,12 +227,8 @@ namespace ReservationSystem.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Date_R")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int?>("ReservationTypeId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Date_R")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -242,7 +241,7 @@ namespace ReservationSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ReservationTypeId");
+                    b.HasIndex("TypeId");
 
                     b.HasIndex("UserId");
 
@@ -265,6 +264,9 @@ namespace ReservationSystem.Migrations
                     b.Property<int>("NumberA")
                         .HasColumnType("int");
 
+                    b.Property<int>("TotalR")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("ReservationTypes");
@@ -275,7 +277,7 @@ namespace ReservationSystem.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -284,7 +286,7 @@ namespace ReservationSystem.Migrations
                     b.HasOne("ReservationSystem.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -293,7 +295,7 @@ namespace ReservationSystem.Migrations
                     b.HasOne("ReservationSystem.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -302,13 +304,13 @@ namespace ReservationSystem.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ReservationSystem.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -317,19 +319,22 @@ namespace ReservationSystem.Migrations
                     b.HasOne("ReservationSystem.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("ReservationSystem.Models.Reservation", b =>
                 {
-                    b.HasOne("ReservationSystem.Models.ReservationType", "ReservationType")
+                    b.HasOne("ReservationSystem.Models.ReservationType", "Type")
                         .WithMany("Reservations")
-                        .HasForeignKey("ReservationTypeId");
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("ReservationSystem.Models.AppUser", "User")
                         .WithMany("Reservations")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

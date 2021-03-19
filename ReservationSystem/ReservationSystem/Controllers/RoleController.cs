@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ReservationSystem.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -75,12 +75,12 @@ namespace ReservationSystem.Controllers
         {
             if (id is null)
             {
-                return View("../Errors/NotFound", "Please add the role Id in URL");
+                return View("../Error/NotFound", "Please add the role Id in URL");
             }
             IdentityRole role = await roleManager.FindByIdAsync(id);
             if (role is null)
             {
-                return View("../Errors/NotFound", $"The role Id : {id} cannot be found");
+                return View("../Error/NotFound", $"The role Id : {id} cannot be found");
             }
 
             EditRoleViewModel model = new EditRoleViewModel()
@@ -110,7 +110,7 @@ namespace ReservationSystem.Controllers
                 var role = await roleManager.FindByIdAsync(model.Id);
                 if (role is null)
                 {
-                    return View("../Errors/NotFound", $"The role Id : {model.Id} cannot be found");
+                    return View("../Error/NotFound", $"The role Id : {model.Id} cannot be found");
                 }
                 role.Name = model.RoleName;
 
@@ -163,7 +163,7 @@ namespace ReservationSystem.Controllers
                 }
                 else
                 {
-                    return View("../Errors/NotFound", $"The role Id : {id} cannot be found");
+                    return View("../Error/NotFound", $"The role Id : {id} cannot be found");
 
                 }
                 return RedirectToAction("Index");
@@ -193,13 +193,13 @@ namespace ReservationSystem.Controllers
         {
             if (string.IsNullOrEmpty(roleId))
             {
-                return View("../Errors/NotFound", $"The role must be exist and not empty in Url");
+                return View("../Error/NotFound", $"The role must be exist and not empty in Url");
 
             }
             var role = await roleManager.FindByIdAsync(roleId);
             if (role is null)
             {
-                return View("../Errors/NotFound", $"The role Id : {role.Id} cannot be found");
+                return View("../Error/NotFound", $"The role Id : {role.Id} cannot be found");
             }
 
             var Models = new List<EditUsersRoleViewModel>();
@@ -239,13 +239,13 @@ namespace ReservationSystem.Controllers
         {
             if (string.IsNullOrEmpty(roleId))
             {
-                return View("../Errors/NotFound", $"The role must be exist and not empty in Url");
+                return View("../Error/NotFound", $"The role must be exist and not empty in Url");
 
             }
             var role = await this.roleManager.FindByIdAsync(roleId);
             if (role is null)
             {
-                return View("../Errors/NotFound", $"The role Id : {role.Id} cannot be found");
+                return View("../Error/NotFound", $"The role Id : {role.Id} cannot be found");
             }
 
             // role if deja affectté et in model is select il faut le supprimer , ou l'affecté si il est selecté au model mais non affecté before

@@ -13,16 +13,19 @@ namespace ReservationSystem.Models
         
         [Required (ErrorMessage = "The Date field is required !")]
         [Display(Name = "Date of Reservation")]
-        public string Date_R { get; set; }
+        public DateTime Date_R { get; set; }
         public Status Status { get; set; }
         public DateTime Date { get; set; }
         public string UserId { get; set; }
-
         public virtual AppUser User { get; set; }
 
         [Required(ErrorMessage = "The Type field is required !")]
         [Display(Name = "Type")]
         public int TypeId { get; set; }
-        public virtual ReservationType ReservationType { get; set; }
+        public virtual ReservationType Type { get; set; }
+
+
+
+        
     }
 }

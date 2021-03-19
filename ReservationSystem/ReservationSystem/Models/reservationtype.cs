@@ -10,7 +10,6 @@ namespace ReservationSystem.Models
     {
         [Key]
         public int Id { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd HH:mm}")]
         public DateTime Date { get; set; }
 
         [Required(ErrorMessage = "The Type name field is required !")]
@@ -20,6 +19,17 @@ namespace ReservationSystem.Models
         [Required(ErrorMessage = "The number of students field is required !")]
         [Display(Name = "Number of Students ")]
         public int NumberA { get; set; }
+        public int TotalR { get; set; }
         public virtual IList<Reservation> Reservations { get; set; }
+
+
+
+
+      
+
+
+
     }
+
+   
 }

@@ -10,7 +10,7 @@
     <hr />
 </div>
 
-<div class="mx-lg-auto my-5 col-12 ">
+<div class="mx-lg-auto my-2 col-12 ">
     <table id="TypesTable" class ="table table-hover text-center ">
         <thead class="text-white" style="background-color:#44426B">
             <tr>
@@ -27,7 +27,7 @@
                 {
                     <tr>
                         <td>@counter</td>
-                        <td>@Html.DisplayFor(modelItem => type.Date)</td>
+                        <td>@type.Date.ToShortDateString()</td>
                         <td>@type.Name</td>
                         <td>@type.NumberA</td>
 

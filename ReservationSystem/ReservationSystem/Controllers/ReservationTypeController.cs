@@ -81,6 +81,7 @@ namespace ReservationSystem.Controllers
         {
             if(ModelState.IsValid)
             {
+                
                 _context.Entry(type).State = EntityState.Modified;
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));

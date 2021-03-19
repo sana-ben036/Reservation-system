@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ReservationSystem.Models;
 using ReservationSystem.Models.ViewModels;
 using System;
@@ -16,10 +17,12 @@ namespace ReservationSystem.Controllers
 
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        private readonly RoleManager<IdentityRole> roleManager;
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
 
         }
 
@@ -245,8 +248,7 @@ namespace ReservationSystem.Controllers
         public IActionResult Index()
         {
 
-            var users = userManager.Users.Where(u => u.Email != User.Identity.Name);
-
+            var users = userManager.Users.Where(u => u.Email != User.Identity.Name).ToList();
             return View(users);
         }
 

@@ -13,7 +13,7 @@
 </div>
 
 <form class="mx-lg-auto my-5 w-50" asp-action="Create" asp-controller="ReservationType" method="post">
-   
+    <input hidden class="form-control" type="datetime" asp-for="Date" value="@DateTime.Now">
     <div class="form-group">
         <label asp-for="Name"></label>
         <input type="text" class="form-control" asp-for="Name">

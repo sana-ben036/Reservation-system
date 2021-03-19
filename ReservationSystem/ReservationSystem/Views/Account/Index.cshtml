@@ -1,4 +1,6 @@
-﻿@model IEnumerable<AppUser>
+﻿@inject RoleManager<IdentityRole> roleManager
+@inject UserManager<AppUser> userManager
+@model IEnumerable<AppUser>
 
 @{
     int counter = 1;
@@ -10,7 +12,7 @@
     <hr />
 </div>
 
-<div class= "mx-lg-auto my-5 col-12">
+<div class="mx-lg-auto my-5 col-12">
     <table id="UsersTable" class="table table-hover text-center ">
         <thead class="text-white" style="background-color:#44426B">
             <tr>
@@ -18,26 +20,36 @@
                 <th scope="col">@Html.DisplayNameFor(item => item.FirstName)</th>
                 <th scope="col">@Html.DisplayNameFor(item => item.LastName)</th>
                 <th scope="col">@Html.DisplayNameFor(item => item.Email)</th>
+                <th scope="col">IsConfirmed</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (AppUser user in Model)
+            
+            @foreach (var user in  Model)
             {
-                <tr>
-                    <td>@counter</td>
-                    <td>@user.FirstName</td>
-                    <td>@user.LastName</td>
-                    <td>@user.Email</td>
+            <tr>
+                <td>@counter</td>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Email</td>
+                @if (await userManager.IsInRoleAsync(user, "Student"))
+                {
+                    <td>Yes</td>
+                }
+                else
+                {
+                    <td>No</td>
+                }
 
-                    <td>
-                        <form method="post" asp-action="DeleteUser" asp-controller="Account" asp-route-id="@user.Id">
-                            <a class="btn btn-primary text-white btn-sm" asp-action="EditUser" asp-controller="Account" asp-route-id="@user.Id">Update</a>
-                            <button type="submit" class="btn btn-dark btn-sm" onclick="return confirm('Are you sure ??')">Delete</button>
-                        </form>
+                <td>
+                    <form method="post" asp-action="DeleteUser" asp-controller="Account" asp-route-id="@user.Id">
+                        <a class="btn btn-primary text-white btn-sm" asp-action="EditUser" asp-controller="Account" asp-route-id="@user.Id">Update</a>
+                        <button type="submit" class="btn btn-dark btn-sm" onclick="return confirm('Are you sure ??')">Delete</button>
+                    </form>
 
-                    </td>
-                </tr>
+                </td>
+            </tr>
                 counter++;
 
             }
@@ -49,14 +61,14 @@
 
 <div class="my-5 text-center ">
     @*<a asp-action="Register">Add New User</a> |*@
-    <a  asp-action="Login" asp-controller="Account">Back To Home</a>
+    <a asp-action="Login" asp-controller="Account">Back To Home</a>
 </div>
 
 @section DTListUsers{
     <script>
-            $(document).ready(function () {
-                $('#UsersTable').dataTable();
-            });
+        $(document).ready(function () {
+            $('#UsersTable').dataTable();
+        });
 
 
     </script>
