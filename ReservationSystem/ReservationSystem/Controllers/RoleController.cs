@@ -87,7 +87,7 @@ namespace ReservationSystem.Controllers
             {
                 Id = role.Id,
                 RoleName = role.Name,
-                Users = new List<string>()
+                Users = new List<string>()  // pour recuperer ds cette list les users de ce role
             };
 
             foreach (AppUser user in await userManager.Users.ToListAsync()) // userManager.Users is not awaitble so change to (await userManager.Users.ToListAsync())
@@ -223,7 +223,8 @@ namespace ReservationSystem.Controllers
 
                 Models.Add(model);
             }
-            ViewBag.RoleId = roleId;
+            ViewBag.RoleName = role.Name;
+            //ViewBag.RoleId = roleId;
             return View(Models);
 
 

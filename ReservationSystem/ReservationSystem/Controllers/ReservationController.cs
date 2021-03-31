@@ -15,7 +15,7 @@ namespace ReservationSystem.Controllers
     [Authorize(Roles = "Admin,Student")]
     public class ReservationController : Controller
     {
-       public int NA=0;
+        public int NA=0;
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> userManager;
         public ReservationController(AppDbContext context, UserManager<AppUser> userManager)
@@ -117,6 +117,7 @@ namespace ReservationSystem.Controllers
 
                 _context.Entry(reservation).State = EntityState.Modified;
 
+                //var NR = _context.Reservations.Count(r => r.TypeId == type.Id && r.Date_R == r.Date_R);
 
                 if (reservation.Status == Status.Accepted)
                 {
@@ -141,54 +142,12 @@ namespace ReservationSystem.Controllers
                 _context.SaveChanges();
 
                 return RedirectToAction(nameof(Index));
+
             }
-
-            //if (reservation.Status == Status.Accepted)
-            //{
-
-            //    if (ModelState.IsValid)
-            //    {
-
-            //        _context.Entry(reservation).State = EntityState.Modified;
+            
 
 
-            //        if (reservation.Status != Status.Accepted)
-            //        {
-
-            //            user.NRA--;
-
-
-            //            _context.SaveChanges();
-            //        }
-
-            //        _context.SaveChanges();
-            //        return RedirectToAction(nameof(Index));
-            //    }
-
-            //}
-            //else
-            //{
-            //    if (ModelState.IsValid)
-            //    {
-
-            //        _context.Entry(reservation).State = EntityState.Modified;
-
-
-            //        if (reservation.Status == Status.Accepted)
-            //        {
-
-            //            user.NRA++;
-
-
-            //            _context.SaveChanges();
-            //        }
-
-            //        _context.SaveChanges();
-            //        return RedirectToAction(nameof(Index));
-            //    }
-
-
-            //}
+            
             ViewBag.UserId = userManager.GetUserId(HttpContext.User);
             IEnumerable<ReservationType> types = _context.ReservationTypes.ToList();
             ViewBag.Types = types;
@@ -214,10 +173,14 @@ namespace ReservationSystem.Controllers
 
             var idUser = reservation.UserId;
             AppUser user = await userManager.FindByIdAsync(idUser);
+            var idType = reservation.TypeId;
+            var type = _context.ReservationTypes.Find(idType);
+
             if (reservation.Status == Status.Accepted)
             {
 
                 user.NRA--;
+                type.TotalR--;
 
                 _context.SaveChanges();
             }

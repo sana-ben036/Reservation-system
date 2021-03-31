@@ -15,7 +15,7 @@
             <div class="card-header">
                 <span>Add or Remove Users from this Role</span>
                 <hr />
-                <input disabled value="Id: @ViewBag.RoleId" class="form-control" />
+                <input disabled value="@ViewBag.RoleName" class="form-control text-success font-weight-bold text-center" />
             </div>
             <div class="card-body">
                 @for (int i = 0; i < Model.Count; i++)
