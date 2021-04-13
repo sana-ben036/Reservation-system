@@ -40,7 +40,7 @@
 
                             @if (User.IsInRole("Admin"))
                             {
-                                <td>@reservation.User.UserName</td>
+                                <td>@reservation.User.FirstName @reservation.User.LastName </td>
                                 <td>@reservation.User.NRA</td>
                             }
 

@@ -17,12 +17,10 @@ namespace ReservationSystem.Controllers
 
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
-        private readonly RoleManager<IdentityRole> roleManager;
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.roleManager = roleManager;
 
         }
 
@@ -30,8 +28,9 @@ namespace ReservationSystem.Controllers
 
         // external login
 
-        [HttpGet]
+        
         [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> Login(string returnUrl)
         {
             AccountLoginViewModel model = new AccountLoginViewModel
@@ -44,8 +43,9 @@ namespace ReservationSystem.Controllers
 
         }
 
-        [HttpPost]
+
         [AllowAnonymous]
+        [HttpPost]
         public IActionResult ExternalLogin(string provider, string returnUrl)
         {
             var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
@@ -162,7 +162,6 @@ namespace ReservationSystem.Controllers
             }
             return View(model);
         }
-
 
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
