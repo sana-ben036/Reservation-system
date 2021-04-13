@@ -163,6 +163,7 @@ namespace ReservationSystem.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
@@ -186,7 +187,7 @@ namespace ReservationSystem.Controllers
             return View(model);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> EditUser(AccountEditUserViewModel model)
         {
@@ -242,7 +243,7 @@ namespace ReservationSystem.Controllers
             return RedirectToAction("Login");
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Index()
         {
@@ -251,13 +252,14 @@ namespace ReservationSystem.Controllers
             return View(users);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult DeleteUser()
         {
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {

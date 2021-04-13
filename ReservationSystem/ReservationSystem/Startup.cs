@@ -36,7 +36,7 @@ namespace ReservationSystem
             services.AddMvc(options =>
             {
                 options.EnableEndpointRouting = false;  // for accept ouwn default routing
-                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build(); // any url to check it will need authentication as condition , if not any one will be able to check local url (any action without authorize)
                 options.Filters.Add(new AuthorizeFilter(policy));
 
             }).AddXmlSerializerFormatters();
